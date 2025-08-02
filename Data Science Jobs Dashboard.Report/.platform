@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Data Science Jobs Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "dfd0111c-289c-4207-acbf-e05e8023853a"
+  }
+}

@@ -1,0 +1,111 @@
+table data_jobs_cleaned
+	lineageTag: f589b79b-3cd0-4b49-9b8a-bc66b6ef6af8
+
+	column work_year
+		dataType: int64
+		formatString: 0
+		lineageTag: e3b90073-d915-450c-bcd5-49a02e714723
+		summarizeBy: sum
+		sourceColumn: work_year
+
+		annotation SummarizationSetBy = Automatic
+
+	column experience_level
+		dataType: string
+		lineageTag: c05e51ec-5f1b-488c-bacd-b9aa7f2faaf1
+		summarizeBy: none
+		sourceColumn: experience_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column employment_type
+		dataType: string
+		lineageTag: a75ba6b6-3e71-4357-ac61-ab54bd1c9022
+		summarizeBy: none
+		sourceColumn: employment_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Job_title
+		dataType: string
+		lineageTag: 87992259-4531-4626-a060-9407c18a32d5
+		summarizeBy: none
+		sourceColumn: Job_title
+
+		annotation SummarizationSetBy = Automatic
+
+	column yearly_salary
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 85a7d0b0-e803-4c49-b03d-18ae3213291e
+		summarizeBy: sum
+		sourceColumn: yearly_salary
+
+		annotation SummarizationSetBy = Automatic
+
+	column salary_currency
+		dataType: string
+		lineageTag: 065cef2e-eb2d-4ae6-9303-3f129d968b9b
+		summarizeBy: none
+		sourceColumn: salary_currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column usd_yearly_salary
+		dataType: int64
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: a300dbe9-04fb-4e50-a706-3d28cbf13fb3
+		summarizeBy: sum
+		sourceColumn: usd_yearly_salary
+
+		annotation SummarizationSetBy = Automatic
+
+	column employee_residence
+		dataType: string
+		lineageTag: fc074d42-36d7-4716-8163-ad55f9bf0999
+		summarizeBy: none
+		sourceColumn: employee_residence
+
+		annotation SummarizationSetBy = Automatic
+
+	column work_type
+		dataType: string
+		lineageTag: d8b7cd31-0139-4a88-a7be-c7d4af51d696
+		summarizeBy: none
+		sourceColumn: work_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column company_location
+		dataType: string
+		lineageTag: 3992891a-9552-424e-8bc0-2b06af0041f7
+		summarizeBy: none
+		sourceColumn: company_location
+
+		annotation SummarizationSetBy = Automatic
+
+	column company_size
+		dataType: string
+		lineageTag: fed271fb-a072-4869-9ba8-414d8eb96340
+		summarizeBy: none
+		sourceColumn: company_size
+
+		annotation SummarizationSetBy = Automatic
+
+	partition data_jobs_cleaned = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\User\Desktop\data jobs\data_jobs_final.xlsx"), null, true),
+				    data_jobs_cleaned_Sheet = Source{[Item="data_jobs_cleaned",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(data_jobs_cleaned_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"work_year", Int64.Type}, {"experience_level", type text}, {"employment_type", type text}, {"job_title", type text}, {"salary", Int64.Type}, {"salary_currency", type text}, {"salary_in_usd", Int64.Type}, {"employee_residence", type text}, {"work_type", type text}, {"company_location", type text}, {"company_size", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"salary", "yearly_salary"}, {"salary_in_usd", "usd_yearly_salary"}, {"job_title", "Job_title"}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Renamed Columns","Machine Learning Engineer","ML Engineer",Replacer.ReplaceText,{"Job_title"})
+				in
+				    #"Replaced Value"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

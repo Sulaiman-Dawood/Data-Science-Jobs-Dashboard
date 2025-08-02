@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Data Science Jobs Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "c216e7bd-a34f-4bcb-a065-cdbb928cfc6c"
+  }
+}
