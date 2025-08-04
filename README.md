@@ -16,7 +16,6 @@ This Power BI project provides insights into the data science job market, featur
 - **Job Market Trends**: Track employment patterns over time
 - **Geographic Insights**: Visualize job distribution and salary variations by country
 - **Experience Level Breakdown**: Analyze opportunities across different career stages
-- **Company Size Impact**: Understand how company size affects compensation and opportunities
 - **Employment Type Analysis**: Compare full-time, part-time, contract, and freelance opportunities
 
 ## 💾 Data Source
