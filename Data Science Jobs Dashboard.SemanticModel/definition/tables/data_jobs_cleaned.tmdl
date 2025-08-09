@@ -96,7 +96,7 @@ table data_jobs_cleaned
 		mode: import
 		source =
 				let
-				    Source = Excel.Workbook(File.Contents("C:\Users\User\Desktop\data jobs\data_jobs_final.xlsx"), null, true),
+				    Source = Excel.Workbook(File.Contents("C:\Users\User\Desktop\Data Science Jobs Dashboard\data_jobs_final.xlsx"), null, true),
 				    data_jobs_cleaned_Sheet = Source{[Item="data_jobs_cleaned",Kind="Sheet"]}[Data],
 				    #"Promoted Headers" = Table.PromoteHeaders(data_jobs_cleaned_Sheet, [PromoteAllScalars=true]),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"work_year", Int64.Type}, {"experience_level", type text}, {"employment_type", type text}, {"job_title", type text}, {"salary", Int64.Type}, {"salary_currency", type text}, {"salary_in_usd", Int64.Type}, {"employee_residence", type text}, {"work_type", type text}, {"company_location", type text}, {"company_size", type text}}),
